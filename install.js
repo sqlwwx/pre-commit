@@ -48,7 +48,7 @@ function getGitFolderPath(currentPath) {
 
 //
 // Resolve git directory for submodules
-//
+console.log(git, exists(git), fs.lstatSync(git).isFile());
 if (exists(git) && fs.lstatSync(git).isFile()) {
   var gitinfo = fs.readFileSync(git).toString()
     , gitdirmatch = /gitdir: (.+)/.exec(gitinfo)
