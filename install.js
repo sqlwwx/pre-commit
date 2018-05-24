@@ -17,16 +17,20 @@ var fs = require('fs')
 // to work correctly.
 //
 
+console.log('pre-commit: root ', root)
+
 var git = getGitFolderPath(root);
 
 // Function to recursively finding .git folder
 function getGitFolderPath(currentPath) {
   var git = path.resolve(currentPath, '.git')
 
-  if (!exists(git) || !fs.lstatSync(git).isDirectory()) {
+  var isExists = exists(git)
+  var isDirectory = fs.lstatSync(git).isDirectory()
+  if (!isExists || !isDirectory) {
     console.log('pre-commit:');
-    console.log('pre-commit: Not found .git folder in', git);
-    
+    console.log('pre-commit: Not found .git folder in', git, isExists, isDirectory);
+
     var newPath = path.resolve(currentPath, '..');
 
     // Stop if we on top folder
